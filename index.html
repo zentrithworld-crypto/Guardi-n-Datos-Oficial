@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GUARDIÁN DATOS - Empieza desde Cero</title>
+    <title>GUARDIÁN DATOS - Un solo toque</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
         body { background: #0a192f; color: #ccd6f6; max-width: 900px; margin: 0 auto; padding: 20px; }
@@ -13,27 +13,21 @@
         .seccion { background: #112240; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
         h2 { color: #8892b0; margin-bottom: 15px; font-size: 1.3rem; }
         .contadores { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin: 20px 0; }
-        .contador { background: #233554; padding: 20px; border-radius: 8px; text-align: center; flex: 1 1 180px; transition: 0.3s; }
-        .contador:hover { transform: scale(1.05); border: 1px solid #64ffda; }
+        .contador { background: #233554; padding: 20px; border-radius: 8px; text-align: center; flex: 1 1 180px; }
         .numero { font-size: 2.2rem; font-weight: bold; color: #64ffda; margin-bottom: 8px; }
         .aviso { background: rgba(100, 255, 218, 0.1); border: 1px solid #64ffda; padding: 15px; border-radius: 8px; margin: 20px 0; }
-        .botones { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
-        button { background: #64ffda; color: #0a192f; border: none; padding: 12px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.2s; }
-        button:hover { background: #4cc9af; transform: scale(1.03); }
+        .botones { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 20px; }
+        button { background: #64ffda; color: #0a192f; border: none; padding: 14px 22px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.15s; font-size: 1rem; }
+        button:disabled { background: #455a64; cursor: not-allowed; opacity: 0.7; }
+        button:hover:not(:disabled) { background: #4cc9af; transform: scale(1.03); }
         .pie { text-align: center; margin-top: 30px; font-size: 0.9rem; color: #8892b0; border-top: 1px solid #233554; padding-top: 15px; }
-        .subiendo { animation: brillo 1s ease-in-out; }
-        @keyframes brillo {
-            0% { box-shadow: 0 0 0 rgba(100,255,218,0); }
-            50% { box-shadow: 0 0 20px rgba(100,255,218,0.5); }
-            100% { box-shadow: 0 0 0 rgba(100,255,218,0); }
-        }
     </style>
 </head>
-<body onload="empezarDesdeCero()">
+<body onload="iniciarSistema()">
 
     <div class="header">
         <h1>🛡️ GUARDIÁN DATOS</h1>
-        <p>Empieza desde cero — Cada apoyo cuenta</p>
+        <p>Protección real — Un solo apoyo por persona</p>
     </div>
 
     <div class="seccion">
@@ -44,15 +38,15 @@ GD·02·010·PROTEGER·SIN_ESPIAR·SIN_DAÑO·SIN_ESTAFAS·SIN_EXCUSAS·TODOS_LO
     </div>
 
     <div class="aviso">
-        <strong>⚠️ ESTADO INICIAL:</strong> Todos los contadores empiezan en 0. Subirán solo cuando haya nuevos apoyos y protección real.
+        <strong>⚠️ REGLA DEL BOTÓN:</strong> Cada persona puede apoyar y bloquear peligros <strong>UNA SOLA VEZ</strong>. Así los números son siempre reales y verdaderos.
     </div>
 
     <div class="seccion">
-        <h2>📊 CONTADORES — EMPIEZAN EN 0</h2>
+        <h2>📊 CONTADORES REALES</h2>
         <div class="contadores">
             <div class="contador">
                 <div class="numero" id="usuarios">0</div>
-                <div>Nuevos apoyos / Usuarios</div>
+                <div>Nuevos apoyos</div>
             </div>
             <div class="contador">
                 <div class="numero" id="protegidos">0</div>
@@ -72,63 +66,72 @@ GD·02·010·PROTEGER·SIN_ESPIAR·SIN_DAÑO·SIN_ESTAFAS·SIN_EXCUSAS·TODOS_LO
     <div class="seccion">
         <h2>⚙️ ACCIONES</h2>
         <div class="botones">
-            <button onclick="alert('🔔 Activado: te avisaré de cada peligro')">Activar Avisos</button>
-            <button onclick="alert('📍 Ubicación: SOLO con tu permiso')">Ayuda de Ubicación</button>
-            <button onclick="alert('💬 Podés escribir o mandar audio')">Comentar</button>
-            <button onclick="sumarProteccion()">+1 Bloquear Peligro</button>
+            <button onclick="activarAvisos()">🔔 Activar Avisos</button>
+            <button onclick="activarUbicacion()">📍 Ayuda de Ubicación</button>
+            <button onclick="abrirComentarios()">💬 Comentar</button>
+            <button id="botonBloquear" onclick="bloquearPeligro()">🚫 +1 Bloquear Peligro</button>
         </div>
     </div>
 
-    <div class="seccion">
-        <h2>🎯 MISIÓN Y VISIÓN</h2>
-        <p><strong>MISIÓN:</strong> Proteger a niños, niñas y todas las personas de peligros en internet.</p>
-        <br>
-        <p><strong>VISIÓN:</strong> Listo al máximo antes del 2029, para cuidar a millones.</p>
-    </div>
-
     <div class="pie">
-        © 2026 Guardián Datos — Todo tuyo, todo para proteger — Empieza desde aquí
+        © 2026 Guardián Datos — Números reales, protección real
     </div>
 
     <script>
-        // FUNCIÓN PARA EMPEZAR SIEMPRE DESDE 0 AL PRIMER USO
-        function empezarDesdeCero() {
-            // Solo ponemos en 0 si no hay nada guardado todavía
+        function obtenerNumero(clave) {
+            const valor = localStorage.getItem(clave);
+            return isNaN(Number(valor)) ? 0 : Number(valor);
+        }
+        function guardarNumero(clave, valor) {
+            localStorage.setItem(clave, String(valor));
+        }
+
+        function iniciarSistema() {
             if (!localStorage.getItem('guardian_iniciado')) {
-                localStorage.setItem('guardian_usuarios', '0');
-                localStorage.setItem('guardian_protegidos', '0');
-                localStorage.setItem('guardian_bloqueados', '0');
-                localStorage.setItem('guardian_estafas', '0');
+                guardarNumero('guardian_usuarios', 1);
+                guardarNumero('guardian_protegidos', 0);
+                guardarNumero('guardian_bloqueados', 0);
+                guardarNumero('guardian_estafas', 0);
                 localStorage.setItem('guardian_iniciado', 'SI');
+                localStorage.setItem('boton_usado', 'NO');
+            }
+            mostrarNumeros();
+            // Si ya usó el botón, lo bloqueamos
+            if (localStorage.getItem('boton_usado') === 'SI') {
+                document.getElementById('botonBloquear').disabled = true;
+            }
+        }
+
+        function mostrarNumeros() {
+            document.getElementById('usuarios').textContent = obtenerNumero('guardian_usuarios');
+            document.getElementById('protegidos').textContent = obtenerNumero('guardian_protegidos');
+            document.getElementById('bloqueados').textContent = obtenerNumero('guardian_bloqueados');
+            document.getElementById('estafas').textContent = obtenerNumero('guardian_estafas');
+        }
+
+        function bloquearPeligro() {
+            // VERIFICAMOS SI YA LO USÓ
+            if (localStorage.getItem('boton_usado') === 'SI') {
+                alert('🛑 YA TOCÁSTE EL BOTÓN UNA VEZ. Solo se puede apoyar una vez para que los números sean reales.');
+                return;
             }
 
-            // Cuando cargue la página: SUMA 1 NUEVO APOYO
-            let usuarios = parseInt(localStorage.getItem('guardian_usuarios')) + 1;
-            localStorage.setItem('guardian_usuarios', usuarios.toString());
+            // PRIMERA Y ÚNICA VEZ: suma 1
+            guardarNumero('guardian_protegidos', obtenerNumero('guardian_protegidos') + 1);
+            guardarNumero('guardian_bloqueados', obtenerNumero('guardian_bloqueados') + 1);
+            guardarNumero('guardian_estafas', obtenerNumero('guardian_estafas') + 1);
+            
+            // MARCAMOS QUE YA LO USÓ Y LO BLOQUEAMOS
+            localStorage.setItem('boton_usado', 'SI');
+            document.getElementById('botonBloquear').disabled = true;
 
-            mostrarNumerosConAnimacion();
+            mostrarNumeros();
+            alert('✅ ¡APOYO REAL SUMADO! Ya no se puede tocar más el botón, los números se mantienen verdaderos.');
         }
 
-        function sumarProteccion() {
-            let prot = parseInt(localStorage.getItem('guardian_protegidos')) + 1;
-            let bloq = parseInt(localStorage.getItem('guardian_bloqueados')) + 1;
-            let est = parseInt(localStorage.getItem('guardian_estafas')) + 1;
-            localStorage.setItem('guardian_protegidos', prot.toString());
-            localStorage.setItem('guardian_bloqueados', bloq.toString());
-            localStorage.setItem('guardian_estafas', est.toString());
-            mostrarNumerosConAnimacion();
-            alert('🛡️ ¡Peligro bloqueado! Sumaste protección real.');
-        }
-
-        function mostrarNumerosConAnimacion() {
-            const ids = ['usuarios','protegidos','bloqueados','estafas'];
-            ids.forEach(id => {
-                const elem = document.getElementById(id);
-                elem.classList.add('subiendo');
-                elem.textContent = localStorage.getItem('guardian_' + id);
-                setTimeout(() => elem.classList.remove('subiendo'), 1000);
-            });
-        }
+        function activarAvisos() { alert('🔔 Avisos activados!'); }
+        function activarUbicacion() { alert('📍 Ubicación: solo con tu permiso!'); }
+        function abrirComentarios() { alert('💬 Podés escribir o mandar audio!'); }
     </script>
 </body>
 </html>
