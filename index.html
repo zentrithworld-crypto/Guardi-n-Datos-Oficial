@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUARDIÁN DATOS - Empieza desde Cero</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #0a192f; color: #ccd6f6; max-width: 900px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #64ffda; padding-bottom: 20px; }
+        h1 { color: #64ffda; font-size: 2.2rem; margin-bottom: 10px; }
+        .codigo { background: #112240; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.85rem; word-break: break-all; margin: 20px 0; border-left: 4px solid #64ffda; }
+        .seccion { background: #112240; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+        h2 { color: #8892b0; margin-bottom: 15px; font-size: 1.3rem; }
+        .contadores { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin: 20px 0; }
+        .contador { background: #233554; padding: 20px; border-radius: 8px; text-align: center; flex: 1 1 180px; transition: 0.3s; }
+        .contador:hover { transform: scale(1.05); border: 1px solid #64ffda; }
+        .numero { font-size: 2.2rem; font-weight: bold; color: #64ffda; margin-bottom: 8px; }
+        .aviso { background: rgba(100, 255, 218, 0.1); border: 1px solid #64ffda; padding: 15px; border-radius: 8px; margin: 20px 0; }
+        .botones { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
+        button { background: #64ffda; color: #0a192f; border: none; padding: 12px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        button:hover { background: #4cc9af; transform: scale(1.03); }
+        .pie { text-align: center; margin-top: 30px; font-size: 0.9rem; color: #8892b0; border-top: 1px solid #233554; padding-top: 15px; }
+        .subiendo { animation: brillo 1s ease-in-out; }
+        @keyframes brillo {
+            0% { box-shadow: 0 0 0 rgba(100,255,218,0); }
+            50% { box-shadow: 0 0 20px rgba(100,255,218,0.5); }
+            100% { box-shadow: 0 0 0 rgba(100,255,218,0); }
+        }
+    </style>
+</head>
+<body onload="empezarDesdeCero()">
+
+    <div class="header">
+        <h1>🛡️ GUARDIÁN DATOS</h1>
+        <p>Empieza desde cero — Cada apoyo cuenta</p>
+    </div>
+
+    <div class="seccion">
+        <h2>🔐 CÓDIGO OFICIAL DEL SISTEMA</h2>
+        <div class="codigo">
+GD·02·010·PROTEGER·SIN_ESPIAR·SIN_DAÑO·SIN_ESTAFAS·SIN_EXCUSAS·TODOS_LOS_DISPOSITIVOS·TODAS_LAS_REDES·SIN_COPIAS_FALSAS·SIN_ROBO_WIFI·SIN_VENTAS_DELITO·RESPETO·PRIVACIDAD·LEGAL·GRATIS·SIEMPRE·NO_DESINSTALAR_SIN_AUTORIZACION·LISTO_ANTES_2029·CAMPANITA_ACTIVA·AVISOS_CLAROS·AUDIO_SEGURO·SIN_RUIDOS_MALOS·RASTREO_SOLO_CON_BOTON·SOLO_SI_ACEPTAS·NUNCA_OCULTO·AYUDA_SEGURA·ESCRIBIR_O_AUDIO·DOS_FORMA_DE_COMENTAR·LIBRE_ELECCION·MENSAJES_SEGUROS
+        </div>
+    </div>
+
+    <div class="aviso">
+        <strong>⚠️ ESTADO INICIAL:</strong> Todos los contadores empiezan en 0. Subirán solo cuando haya nuevos apoyos y protección real.
+    </div>
+
+    <div class="seccion">
+        <h2>📊 CONTADORES — EMPIEZAN EN 0</h2>
+        <div class="contadores">
+            <div class="contador">
+                <div class="numero" id="usuarios">0</div>
+                <div>Nuevos apoyos / Usuarios</div>
+            </div>
+            <div class="contador">
+                <div class="numero" id="protegidos">0</div>
+                <div>Personas protegidas</div>
+            </div>
+            <div class="contador">
+                <div class="numero" id="bloqueados">0</div>
+                <div>Peligros bloqueados</div>
+            </div>
+            <div class="contador">
+                <div class="numero" id="estafas">0</div>
+                <div>Estafas vencidas</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="seccion">
+        <h2>⚙️ ACCIONES</h2>
+        <div class="botones">
+            <button onclick="alert('🔔 Activado: te avisaré de cada peligro')">Activar Avisos</button>
+            <button onclick="alert('📍 Ubicación: SOLO con tu permiso')">Ayuda de Ubicación</button>
+            <button onclick="alert('💬 Podés escribir o mandar audio')">Comentar</button>
+            <button onclick="sumarProteccion()">+1 Bloquear Peligro</button>
+        </div>
+    </div>
+
+    <div class="seccion">
+        <h2>🎯 MISIÓN Y VISIÓN</h2>
+        <p><strong>MISIÓN:</strong> Proteger a niños, niñas y todas las personas de peligros en internet.</p>
+        <br>
+        <p><strong>VISIÓN:</strong> Listo al máximo antes del 2029, para cuidar a millones.</p>
+    </div>
+
+    <div class="pie">
+        © 2026 Guardián Datos — Todo tuyo, todo para proteger — Empieza desde aquí
+    </div>
+
+    <script>
+        // FUNCIÓN PARA EMPEZAR SIEMPRE DESDE 0 AL PRIMER USO
+        function empezarDesdeCero() {
+            // Solo ponemos en 0 si no hay nada guardado todavía
+            if (!localStorage.getItem('guardian_iniciado')) {
+                localStorage.setItem('guardian_usuarios', '0');
+                localStorage.setItem('guardian_protegidos', '0');
+                localStorage.setItem('guardian_bloqueados', '0');
+                localStorage.setItem('guardian_estafas', '0');
+                localStorage.setItem('guardian_iniciado', 'SI');
+            }
+
+            // Cuando cargue la página: SUMA 1 NUEVO APOYO
+            let usuarios = parseInt(localStorage.getItem('guardian_usuarios')) + 1;
+            localStorage.setItem('guardian_usuarios', usuarios.toString());
+
+            mostrarNumerosConAnimacion();
+        }
+
+        function sumarProteccion() {
+            let prot = parseInt(localStorage.getItem('guardian_protegidos')) + 1;
+            let bloq = parseInt(localStorage.getItem('guardian_bloqueados')) + 1;
+            let est = parseInt(localStorage.getItem('guardian_estafas')) + 1;
+            localStorage.setItem('guardian_protegidos', prot.toString());
+            localStorage.setItem('guardian_bloqueados', bloq.toString());
+            localStorage.setItem('guardian_estafas', est.toString());
+            mostrarNumerosConAnimacion();
+            alert('🛡️ ¡Peligro bloqueado! Sumaste protección real.');
+        }
+
+        function mostrarNumerosConAnimacion() {
+            const ids = ['usuarios','protegidos','bloqueados','estafas'];
+            ids.forEach(id => {
+                const elem = document.getElementById(id);
+                elem.classList.add('subiendo');
+                elem.textContent = localStorage.getItem('guardian_' + id);
+                setTimeout(() => elem.classList.remove('subiendo'), 1000);
+            });
+        }
+    </script>
+</body>
+</html>
