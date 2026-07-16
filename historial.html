@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 Mis Notas — Guardián Datos</title>
+    <style>
+        body { background:#0f172a; color:#e2e8f0; max-width:800px; margin:0 auto; padding:20px; font-family:Arial; }
+        h1 { color:#38bdf8; text-align:center; }
+        .nota { background:#1e293b; border-radius:8px; padding:12px; margin:8px 0; }
+        .fecha { color:#94a3b8; font-size:0.85rem; }
+        button { background:#ef4444; color:white; border:none; padding:10px 15px; border-radius:8px; cursor:pointer; margin:10px 0; }
+        a { color:#38bdf8; text-decoration:none; }
+    </style>
+</head>
+<body>
+    <h1>📝 MIS NOTAS GUARDADAS</h1>
+    <div id="lista-notas"></div>
+    <button onclick="borrarTodo()">🗑 Borrar todas</button>
+    <p style="text-align:center; margin-top:20px;"><a href="index.html">← Volver al inicio</a></p>
+
+<script>
+function cargar() {
+    const notas = JSON.parse(localStorage.getItem('mis_notas') || '[]');
+    const lista = document.getElementById('lista-notas');
+    lista.innerHTML = notas.length === 0 ? '<p style="text-align:center;">Aún no guardaste notas</p>' : '';
+    notas.forEach(n => lista.innerHTML += `<div class="nota"><div class="fecha">${n.fecha}</div><div>${n.texto}</div></div>`);
+}
+function borrarTodo() {
+    if(confirm('¿Borrar todas las notas?')) {
+        localStorage.setItem('mis_notas','[]'); cargar();
+    }
+}
+cargar();
+</script>
+</body>
+</html>
